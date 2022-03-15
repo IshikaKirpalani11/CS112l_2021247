@@ -1,0 +1,61 @@
+#include<iostream>
+
+using namespace std;
+
+class Heater{
+	private:
+		int temperature;
+		
+	public:
+		int getTemperature()
+		{
+			return temperature;
+		}
+		
+		Heater()
+		{
+			temperature = 15;
+		}
+		
+		void warmer()
+		{
+			temperature += 5;
+		}
+		
+		void cooler()
+		{
+			temperature -= 5;
+		}
+		
+};
+
+int main()
+{
+	Heater h;
+	
+	int temp;
+	while(1)
+	{
+		cout<<"\nTemperature = "<<h.getTemperature();
+		
+		cout<<"\n\n1. Warmer\n2. Cooler\n3. Exit\n\nEnter Option: ";
+		cin>>temp;
+		
+		switch (temp)
+		{
+			case 1:
+				h.warmer();
+				break;
+			
+			case 2:
+				h.cooler();
+				break;
+				
+			case 3:
+				exit(0);
+				
+			default:
+				cout<<"\nChoose Correct Option!\n";
+		}
+	}
+}
