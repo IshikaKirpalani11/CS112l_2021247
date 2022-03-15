@@ -1,0 +1,87 @@
+#include<iostream>
+
+using namespace std;
+
+class Parity{
+	private:
+		int* array;
+		int n;
+		
+	public:
+		Parity()
+		{
+			n=0;
+			array = new int[100];
+		}
+		
+		void put(int num)
+		{
+			array[n] = num;
+			n++;
+		}
+		
+		void print()
+		{
+			cout<<"\n\n";
+			for(int i=0; i<n; i++)
+			{
+				cout<<array[i]<<" , ";
+			}
+			cout<<"\n\n";
+		}
+		
+		void deleteLast()
+		{
+			array[n] = -1;
+			n--;
+		}
+		
+		int test()
+		{
+			return (n%2 == 0? 1:0);
+		}
+};
+
+int main()
+{
+	Parity p;
+	
+	while(1)
+	{
+		int temp;
+		int num;
+		
+		cout<<"\n\n";
+		cout<<"1. put()\n2. print()\n3. delete()\n4. test()\n5. exit\n\nEnter your choice: ";
+		cin>>temp;
+		cout<<"\n\n";
+		switch(temp)
+		{
+			case 1:
+				cout<<"Enter Number to add: ";
+				cin>>num;
+				
+				p.put(num);
+				break;
+				
+			case 2:
+				p.print();
+				break;
+				
+			case 3:
+				p.deleteLast();
+				break;
+				
+			case 4:
+				cout<<"1 for EVEN and 0 for ODD: "<<p.test();
+				break;
+				
+			case 5:
+				exit(0);
+					
+			default:
+				 cout<<"Choose Correct Option!";
+		}
+	}
+	
+}
