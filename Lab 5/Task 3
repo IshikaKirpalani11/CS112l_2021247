@@ -1,0 +1,166 @@
+#include<iostream>
+
+using namespace std;
+
+class StringType{
+	private:
+		string s1, s2;
+		
+	public:
+		void setValues(string str1, string str2)
+		{
+			s1 = str1;
+			s2 = str2;
+		}
+		
+		void printValues()
+		{
+			cout<<"\n\n";
+			
+			cout<<"String 1 is: "<<s1<<endl;
+			cout<<"String 2 is: "<<s2<<endl;
+			
+			cout<<"\n\n";
+		}
+		
+		int maxLength()
+		{
+			int n1, n2;
+			
+			for(int i=0; ;i++)
+			{
+				if(s1[i]!='\0')
+					n1++;
+					
+				if(s2[i]!='\0')
+					n2++;
+					
+				if(s1[i]=='\0' && s2[i]=='\0')
+					break;
+			}
+			
+			if(n1>n2)
+			{
+				return n1;
+			}
+					
+			return n2;
+		}
+		
+		int compare()
+		{
+			for(int i=0; i<maxLength() ;i++)
+			{
+				if(s1[i] > s2[i])
+				{
+					cout<<"String 1 "<<s1<<" is greater than String 2 "<<s2;
+					return 1;
+				}
+					
+				if(s1[i] < s2[i])
+				{
+					cout<<"String 1 "<<s1<<" is lesser than String 2 "<<s2;
+					return -1;
+				}
+					
+			}
+			
+			cout<<"String 1 "<<s1<<" is equal to String 2 "<<s2;
+			return 0;
+		}
+		
+		void copy()
+		{
+			s1 = s2;
+			
+			cout<<"After copying!\nString 1 = "<<s1;
+		}
+		
+		string concatenate()
+		{
+			s1 = s1 + s2;
+			cout<<"String 1 after concatenation is: "<<s1;
+			return s1;
+		}
+		
+		int searchChar(char c)
+		{
+			for(int i=0; i<maxLength(); i++)
+			{
+				if(s1[i] == c)
+				{
+					cout<<"Char "<<c<<" found in "<<s1;
+					return 1;
+				}
+				
+			}
+			
+			cout<<"Char "<<c<<" not found!";
+			return 0;
+			
+		}
+	
+};
+
+int main()
+{
+	StringType s;
+	
+	while(1)
+	{
+		int temp;
+		string s1, s2;
+		
+		cout<<"\n\n";
+		cout<<"1. setValues()\n2. print()\n3. maxLength()\n4. compare()\n5. copy()\n6. concatenate()\n7. searchChar()\n8. exit\n\nEnter your choice: ";
+		cin>>temp;
+		cout<<"\n\n";
+		switch(temp)
+		{
+			case 1:
+				cout<<"Enter String 1: ";
+				cin>>s1;
+				
+				cout<<"Enter String 2: ";
+				cin>>s2;
+
+				s.setValues(s1, s2);
+				break;
+				
+			case 2:
+				s.printValues();
+				break;
+				
+			case 3:
+				cout<<"Max Length is: "<<s.maxLength();
+				break;
+				
+			case 4:
+				s.compare();
+				break;
+					
+			case 5:
+				s.copy();
+				break;
+				
+			case 6:
+				s.concatenate();
+				break;
+				
+			case 7:
+				char x;
+				cout<<"Enter character to find: ";
+				cin>>x;
+				
+				s.searchChar(x);
+				break;
+				
+			case 8:
+				exit(0);
+				break;
+				
+			default:
+				 cout<<"Choose Correct Option!";
+		}
+	}
+}
