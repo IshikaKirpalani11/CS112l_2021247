@@ -1,0 +1,113 @@
+#include <iostream>
+using namespace std;
+
+struct Officer {
+	int id;
+	string name;
+	string rank;
+};
+
+class Security {
+	
+private:
+	static int count;
+
+public:
+
+	Security()
+	{
+	
+	}
+
+	bool isPalindrome(int id)
+	{
+		int temp = id;
+		int rev = 0;
+		int digit = 0;
+
+		do
+		{
+			digit = id % 10;
+			rev = rev * 10 + digit;
+			id = id / 10;
+
+		} while (id != 0);
+
+		if (temp == rev)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	int getCount()
+	{
+		return count;
+	}
+
+	void isAllow()
+	{
+		Officer o;
+
+		cout << "Enter Id of Officer: ";
+		cin >> o.id;
+
+		cout << "Enter Name of Officer: ";
+		cin >> o.name;
+
+		cout << "Enter Rank of Officer: ";
+		cin >> o.rank;
+
+		if (isPalindrome(o.id))
+		{
+			cout << "The officer is not allowed to enter in restricted area!";
+		}
+		else
+		{
+			cout << "The officer is allowed to enter in restricted area!";
+			count++;
+		}
+	}
+};
+
+int Security::count = 0;
+
+int main()
+{
+	Security s;
+
+	while (1)
+	{
+		int choice;
+		cout << "Menu:\n\n";
+		cout << "1. Enter Officer's Details.\n";
+		cout << "2. Get Total number of officers.\n";
+		cout << "3. Exit!\n\n";
+		cout << "Make your choice (1-3): ";
+		cin >> choice;
+
+		cout << "\n";
+		switch (choice)
+		{
+		case 1:
+			s.isAllow();
+			break;
+
+		case 2:
+			cout << "Total number of Officers are: " << s.getCount();
+			break;
+
+		case 3:
+			exit(0);
+
+		default:
+			cout << "Make appropiate choice (1-3): ";
+
+		}
+
+		cout << "\n";
+	}
+}
