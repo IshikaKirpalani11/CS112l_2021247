@@ -1,0 +1,94 @@
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+class Person{
+private:
+	string name;
+	
+public:
+	friend class Coordinator;
+};
+
+class Coordinator{
+private:
+	Person p1;
+	Person p2;
+	
+public:
+	void allotRoom()
+	{
+		cout<<"\n\n";
+		cout<<"Enter First Competition and University name: ";
+		getline(cin, p1.name);
+		
+		cout<<"Enter Second Competition and University name: ";
+		getline(cin, p2.name);
+		
+		//temp1 and temp2 are universities name
+		string temp1 = "";
+		string temp2 = "";
+		
+		for(int i=0; i<p1.name.length(); i++)
+		{
+			if(p1.name[i] == ' ')
+			{
+				i++;
+				for(; i<p1.name.length(); i++)
+				{
+					temp1 = temp1+p1.name[i];
+				}
+				
+				break;
+			}
+		}
+		
+		for(int i=0; i<p2.name.length(); i++)
+		{
+			if(p2.name[i] == ' ')
+			{
+				i++;
+				for(; i<p2.name.length(); i++)
+				{
+					temp2 = temp2+p2.name[i];
+				}
+				break;
+			}
+		}
+		
+		cout<<"\nMessage from Coordinator: Person 1 and Person 2 are ";
+		
+		if(temp1 == temp2)
+		{
+			cout<<"Roomates, and the room number is ";
+			int maxLen;
+			
+			//max length = (total length) - (length of university's name) - (length of space i.e. 1) = length of teams name
+			
+			maxLen = (p1.name.length() - temp1.length() - 1);
+			
+			if(maxLen < (p2.name.length() - temp2.length() - 1))
+			{
+				maxLen = (p2.name.length() - temp2.length() - 1);
+			}
+			
+			cout<<maxLen<<"!";
+		}
+		
+		else
+		{
+			cout<<"not Roomates!";
+		}
+		
+		cout<<endl<<endl;
+	}
+};
+int main()
+{
+	Coordinator c;
+	while(1)
+	{
+		c.allotRoom();
+	}
+}
