@@ -1,0 +1,335 @@
+#include <iostream>
+using namespace std;
+#define MAX 10
+
+class Stack { // Making stack for giving X or O option to user
+    int top{};
+
+public:
+    int a[MAX]; // Maximum size of Stack
+
+    Stack() { top = -1; }
+    bool push(int x); // Push function to insert value into stack
+    int pop();// Pop function to remove top element from stack
+    void peek(); // Peek function to for checking top element
+    bool isEmpty();// Function for checking whether stack is empty or not
+};
+
+bool Stack::push(int x)
+{
+    if (top >= (MAX - 1)) {
+        cout << "Stack Overflow";
+        return false;
+    }
+    else {
+        a[++top] = x;
+        
+        cout << char(x) << "  ";
+        return true;
+    }
+}
+
+int Stack::pop()
+{
+    if (top < 0) {
+        cout << "Stack Underflow";
+        return 0;
+    }
+    else {
+        int x = a[top--];
+        x = char(x);
+        return x;
+    }
+}
+void Stack::peek()
+{
+    if (top < 0) {
+        cout << "Stack is Empty";
+    }
+    else {
+        int x = a[top];
+        cout << char(x) << " ";
+    }
+}
+
+bool Stack::isEmpty()
+{
+    return (top < 0);
+}
+
+
+// Node class to represent
+// a node of the linked list.
+class Node {
+public:
+    char data;
+    Node* next;
+
+    // Default constructor
+    Node()
+    {
+        data = '0';
+        next = NULL;
+    }
+
+    // Parameterised Constructor
+    Node(char data)
+    {
+        this->data = data;
+        this->next = NULL;
+    }
+};
+
+// Linked list class to
+// implement a linked list.
+class Linkedlist {
+    Node* head;
+public:
+    // Default constructor
+    Linkedlist() { head = NULL; }
+
+    // Function to insert a
+    // node at the end of the
+    // linked list.
+    void insertNode( char);
+
+    // Function to print the
+    // linked list.
+    void printList();
+    // For initialising linked list to array and making
+    void board(char arr[MAX]);
+    // Check conditions of winner function
+    char checkwin(char arr[MAX]);
+
+
+};
+// Function to insert a new node.
+void Linkedlist::insertNode(char data)
+{
+    // Create the new Node.
+    Node* newNode = new Node(data);
+
+    // Assign to head
+    if (head == NULL) {
+        head = newNode;
+        return;
+    }
+
+    // Traverse till end of list
+    Node* temp = head;
+    while (temp->next != NULL) {
+
+        // Update temp
+        temp = temp->next;
+    }
+
+    // Insert at the last.
+    temp->next = newNode;
+}
+
+// Function to print the
+// nodes of the linked list.
+void Linkedlist::printList()
+{
+    int count = 0;
+    Node* temp = head;
+
+
+    // Check for empty list.
+    if (head == NULL) {
+        cout << "List empty" << endl;
+        return ;
+    }
+
+    // Traverse the list.
+    
+        while (temp != NULL) {
+            if (temp->data == 4|| temp->data == 7) { // Conditons to print linkedlist elements in tictactoe board form
+                temp->data = 0;
+                cout << endl;
+                cout << "-----------";
+                cout << endl;
+            }
+                cout << temp->data << " | ";
+                temp = temp->next;
+             
+        }
+    
+}
+
+void Linkedlist::board(char arr[MAX]) { // Function to display board
+    static int count = 0; // Making static variable so that while(temp!=NULL) loop doesno run again and gain as it is used in main in loop
+    Node* temp = head;
+    // Check for empty list.
+    if (head == NULL) {
+        cout << "List empty" << endl;
+        return;
+    }
+    int index = 0;
+    if (count == 0)
+    {
+        while (temp != NULL) {
+            arr[index++] = temp->data; // Initialising linked list elements to an aaray
+            temp = temp->next;
+
+        }
+    }
+        count++;
+   // for (int i = 0; i < MAX; i++) {
+     //   cout << arr[i] << " | ";
+    //}
+    cout << "\n\n\tTic Tac Toe\n\n";
+
+    cout << "Player 1 (X)  -  Player 2 (O)" << endl << endl;
+    cout << endl;
+
+    cout << "     |     |     " << endl;
+    cout << "  " << arr[1] << "  |  " << arr[2] << "  |  " << arr[3] << endl;
+
+    cout << "_____|_____|_____" << endl;
+    cout << "     |     |     " << endl;
+
+    cout << "  " << arr[4] << "  |  " << arr[5] << "  |  " << arr[6] << endl;
+
+    cout << "_____|_____|_____" << endl;
+    cout << "     |     |     " << endl;
+
+    cout << "  " << arr[7] << "  |  " << arr[8] << "  |  " << arr[9] << endl;
+
+    cout << "     |     |     " << endl;
+}
+
+
+
+    
+char Linkedlist::checkwin(char arr[MAX]) { // Function to checking win condition by vetical, horizontal , diagonals etc
+    
+        if (arr[1] == arr[2] && arr[2] == arr[3])
+            return 1;
+        else if (arr[4] == arr[5] && arr[5] == arr[6])
+            return 1;
+        else if (arr[7] == arr[8] && arr[8] == arr[9])
+            return 1;
+        else if (arr[1] == arr[4] && arr[4] == arr[7])
+            return 1;
+        else if (arr[2] == arr[5] && arr[5] == arr[8])
+            return 1;
+        else if (arr[3] == arr[6] && arr[6] == arr[9])
+            return 1;
+        else if (arr[1] == arr[5] && arr[5] == arr[9])
+            return 1;
+        else if (arr[3] == arr[5] && arr[5] == arr[7])
+            return 1;
+        else if (arr[1] != '1' && arr[2] != '2' && arr[3] != '3'
+            && arr[4] != '4' && arr[5] != '5' && arr[6] != '6'
+            && arr[7] != '7' && arr[8] != '8' && arr[9] != '9')
+
+            return 0;
+        else
+            return -1;
+    }
+
+
+
+    // Driver Code
+int main()
+{
+    char arr[MAX] = { '0' , '0' ,'0' ,'0' ,'0' ,'0' ,'0' ,'0' ,'0' ,'0' }; // Making array and initialising it '0'
+    class Stack s;
+    cout << "Pushed elements in stack 1 are; \n";
+    s.push(88); // pushing 88 to stack which is X acc to Ascii value
+    cout << "\nElement popped from stack and inserted in varaible t ;\n";
+    char t = (s.pop()); // after popping X(which we got after type casting) and saving it to char varaible t 
+    cout << t;
+    cout << "\n\n";
+    cout << "Pushed elements in stack 2 are; \n";
+    class Stack s1;
+    s1.push(79); // pushing 79 which is O acc to Ascii value
+    cout << "\nElement popped from stack and inserted in varaible r ;\n";
+    char r = (s1.pop());// after popping O(which we got after typecasting) and saving it to char variable r
+    cout << r;
+    cout << endl;
+
+    Linkedlist list; 
+    // Inserting nodes
+    list.insertNode('0'); 
+    list.insertNode('1');
+    list.insertNode('2');
+    list.insertNode('3');
+    list.insertNode('4');
+    list.insertNode('5');
+    list.insertNode('6');
+    list.insertNode('7');
+    list.insertNode('8');
+    list.insertNode('9');
+
+    int player = 1, i, choice;
+
+    char mark;
+    do // loop until any of player win or tictactoe matcg gets draw
+    {
+        list.board(arr);
+        player = (player % 2) ? 1 : 2; // to switch between player 1 and 2
+
+        cout << "Player " << player << ", enter a number:  ";
+        cin >> choice;
+
+        mark = (player == 1) ? t : r; // to switch between X and O
+// below checking condtion and marking X or O on respective position inputted by players
+        if (choice == 1 && arr[1] == '1') {
+            arr[1] = mark;
+        }
+        else if (choice == 2 && arr[2] == '2')
+        {
+            arr[2] = mark;
+        }
+        else if (choice == 3 && arr[3] == '3')
+        {
+            arr[3] = mark;
+        }
+        else if (choice == 4 && arr[4] == '4')
+        {
+            arr[4] = mark;
+        }
+        else if (choice == 5 && arr[5] == '5')
+        {
+            arr[5] = mark;
+        }
+        else if (choice == 6 && arr[6] == '6')
+        {
+            arr[6] = mark;
+        }
+        else if (choice == 7 && arr[7] == '7')
+        {
+            arr[7] = mark;
+        }
+        else if (choice == 8 && arr[8] == '8')
+        {
+            arr[8] = mark;
+        }
+        else if (choice == 9 && arr[9] == '9')
+        {
+            arr[9] = mark;
+        }
+        else // if conditions doesnot matches then decrement to remain on same player and telling invalid move
+        {
+            cout << "Invalid move ";
+
+            player--;
+            cin.ignore();
+            cin.get();
+        }
+        i = list.checkwin(arr); // then checking win
+
+        player++;
+    } while (i == -1);
+
+    if (i == 1) // if above loop returns 1 respective players win
+    {
+        cout << "==>\aPlayer " << --player << " win ";
+
+    }
+    else { // otherwise gane is drawn
+        cout << "==>\aGame draw";
+    }
+}
